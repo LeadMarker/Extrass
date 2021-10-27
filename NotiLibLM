@@ -1,3 +1,12 @@
+--[[
+discord.gg/akumahub
+
+local Noti = loadstring(game:HttpGet("https://raw.githubusercontent.com/LeadMarker/Extrass/main/NotiLibLM"))()
+
+Noti.Notify("LeadMarker", "LeadMarker made this notisystem ngl", 3, Color3.fromRGB(255,255,255))
+Noti.Notify("But like", "it can resize too", 3)
+--]]
+
 local Noti = {}
 local TweenService = game:GetService("TweenService")
 local YOffset = -20
