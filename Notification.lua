@@ -14,7 +14,11 @@ local Notilib = Instance.new("ScreenGui")
 Notilib.Name = "Notilib"
 Notilib.Parent = game.CoreGui
 
-function Noti.Notify(title, text, waitT)
+color = Color3.fromRGB(0, 123, 255)
+
+function Noti.Notify(title, text, waitT, accent)
+    local NAccent = accent or color
+
     waitT = waitT or 5
     local Main = Instance.new("Frame")
     Main.Name = "Main"
@@ -27,7 +31,7 @@ function Noti.Notify(title, text, waitT)
     local Side = Instance.new("Frame")
     Side.Name = "Side"
     Side.Parent = Main
-    Side.BackgroundColor3 = Color3.fromRGB(0, 123, 255)
+    Side.BackgroundColor3 = NAccent
     Side.BorderSizePixel = 0
     Side.Size = UDim2.new(0, 3, 0, 40)
 
