@@ -1735,7 +1735,7 @@ inputService.InputChanged:connect(function(input)
 	end
 end)
 
-function library:SaveConfig()
+function SaveConfig()
 	local Config = {}
     Config = game:GetService"HttpService":JSONDecode(readfile(file_settings['MainFolder'] .. '/' .. file_settings['Folder'] .. '/' .. getgenv().chosenconfig .. '.txt'))
 	for _, option in next, library.options do
@@ -1764,7 +1764,7 @@ function library:SaveConfig()
 end
 
 
-function library:LoadConfig()
+function LoadConfig()
     local Read, Config = pcall(function()
 		return game:GetService"HttpService":JSONDecode(readfile(file_settings['MainFolder'] .. '/' .. file_settings['Folder'] .. '/' .. getgenv().chosenconfig .. '.txt'))
     end)
