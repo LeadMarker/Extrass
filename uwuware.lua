@@ -1735,4 +1735,63 @@ inputService.InputChanged:connect(function(input)
 	end
 end)
 
+function SaveConfig()
+	local Config = {}
+    Config = game:GetService"HttpService":JSONDecode(readfile(file_settings['MainFolder'] .. '/' .. file_settings['Folder'] .. '/' .. getgenv().chosenconfig .. '.txt'))
+	for _, option in next, library.options do
+		if option.type ~= "button" and option.flag then
+			if option.type == "toggle" then
+				Config[option.flag] = option.state and 1 or 0
+			elseif option.type == "color" then
+				Config[option.flag] = {
+					option.color.r,
+					option.color.g,
+					option.color.b
+				}
+				if option.trans then
+					Config[option.flag .. " Transparency"] = option.trans
+				end
+			elseif option.type == "bind" then
+				Config[option.flag] = option.key
+			elseif option.type == "list" then
+				Config[option.flag] = option.value
+			else
+				Config[option.flag] = option.value
+			end
+		end
+	end
+	writefile(file_settings['MainFolder'] .. '/' .. file_settings['Folder'] .. '/' .. getgenv().chosenconfig .. '.txt', game:GetService"HttpService":JSONEncode(Config))
+end
+
+
+function LoadConfig()
+    local Read, Config = pcall(function()
+		return game:GetService"HttpService":JSONDecode(readfile(file_settings['MainFolder'] .. '/' .. file_settings['Folder'] .. '/' .. getgenv().chosenconfig .. '.txt'))
+    end)
+	Config = Read and Config or {}
+    for _, option in next, library.options do
+        if option.type ~= "button" and option.flag then
+			if option.type == "toggle" then
+				spawn(function()
+					option:SetState(Config[option.flag])
+				end)
+			elseif option.type == "color" then
+				if Config[option.flag] then
+					spawn(function()
+						option:SetColor(Config[option.flag])
+					end)
+				end
+			elseif option.type == "bind" then
+				spawn(function()
+					option:SetKey(Config[option.flag])
+				end)
+			else
+				spawn(function()
+					option:SetValue(Config[option.flag])
+				end)
+			end
+		end
+    end
+end
+
 return library
