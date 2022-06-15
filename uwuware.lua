@@ -1528,7 +1528,6 @@ local function getFnctions(parent)
 		option.type = 'divider'
 		option.position = #self.options
 		table.insert(self.options, option)
-		library.options[option.flag] = option
 
 		return options
 	end
