@@ -866,7 +866,6 @@ local function createList(option, parent, holder)
 				label:Destroy()
 			end
 		end
-		self:SetValue("")
 	end
 	
 	function option:SetValue(value)
